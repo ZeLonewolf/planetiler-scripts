@@ -18,8 +18,8 @@ planetiler-scripts/01_mount_ramdisk400.sh
 
 cd build
 
-planetiler-scripts/02_download_planet.sh
-planetiler-scripts/03_render_planet.sh
-planetiler-scripts/04_copy_mbtiles.sh
+../planetiler-scripts/02_download_planet.sh
+../planetiler-scripts/03_render_planet.sh
+../planetiler-scripts/04_copy_mbtiles.sh
 
 sudo shutdown -hy now
