@@ -14,12 +14,12 @@ git clone https://github.com/ZeLonewolf/planetiler-scripts.git
 
 planetiler-scripts/00_setup.sh
 
-planetiler-scripts/01_mount_ramdisk400.sh
+planetiler-scripts/01_mount_ramdisk350.sh
 
 cd build
 
-planetiler-scripts/02_download_planet.sh
-planetiler-scripts/03_render_planet.sh
-planetiler-scripts/04_copy_mbtiles.sh
+../planetiler-scripts/02_download_planet.sh
+../planetiler-scripts/03_render_planet.sh
+../planetiler-scripts/04_copy_mbtiles.sh
 
-sudo shutdown -hy now
+#sudo shutdown -h now
