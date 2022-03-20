@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkfs.xfs /dev/nvme2n1
+mkfs.xfs /dev/nvme1n1
 mkdir /home/ubuntu/build
-mount -t xfs /dev/nvme2n1 /home/ubuntu/build
+mount -t xfs /dev/nvme1n1 /home/ubuntu/build
 cd /home/ubuntu/build
