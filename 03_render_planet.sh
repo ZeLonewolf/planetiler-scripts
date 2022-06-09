@@ -10,5 +10,5 @@ sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx115g' -v "$(pwd)/data":/data -v /mnt/e
   --mbtiles=/output/new-planet.mbtiles \
   --transportation_name_size_for_shield \ 
   --transportation_name_limit_merge \
-  --storage=ram --mmap-temp --nodemap-type=array --building_merge_z13=false | sudo tee -a logs.txt
+  --storage=ram --nodemap-type=array --building_merge_z13=false | sudo tee -a logs.txt
   
