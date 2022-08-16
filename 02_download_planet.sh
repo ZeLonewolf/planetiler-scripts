@@ -3,7 +3,7 @@
 sudo cp /mnt/efs/wikidata_names.json data/sources/ 
 
 sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx80g' -v "$(pwd)/data":/data \
-  ghcr.io/onthegomap/planetiler:latest --area=planet --bounds=world --download --download-threads=10 --download-chunk-size-mb=1000 \
+  ghcr.io/onthegomap/planetiler:latest --area=planet --bounds=world --download --download-threads=20 --download-chunk-size-mb=500 \
   --only-fetch-wikidata
 
 sudo cp data/sources/wikidata_names.json /mnt/efs/
