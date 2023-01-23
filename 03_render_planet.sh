@@ -13,7 +13,7 @@ run() {
     --transportation_name_size_for_shield \
     --transportation_name_limit_merge \
     --storage=mmap --nodemap-type=array --building_merge_z13=false
-  sudo time cp data/new-planet.mbtiles /mnt/efs/new-planet.mbtiles
+  sudo time cp /home/ubuntu/build/data/new-planet.mbtiles /mnt/efs/new-planet.mbtiles
 }
 
 run | sudo tee -a logs.txt
