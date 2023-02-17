@@ -12,6 +12,7 @@ run() {
     --mbtiles=/data/new-planet.mbtiles \
     --transportation_name_size_for_shield \
     --transportation_name_limit_merge \
+    --boundary-osm-only \
     --storage=mmap --nodemap-type=array --building_merge_z13=false
   sudo time cp /home/ubuntu/build/data/new-planet.mbtiles /mnt/efs/new-planet.mbtiles
 }
