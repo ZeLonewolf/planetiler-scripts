@@ -7,4 +7,4 @@ One-time planet rebuild scripts:
   `wget -O - https://raw.githubusercontent.com/ZeLonewolf/planetiler-scripts/main/aws.512GB.sh | bash`
 * AWS image with >100G ram and >400G SSD:
   `wget -O - https://raw.githubusercontent.com/ZeLonewolf/planetiler-scripts/main/aws.ssd.sh | bash`
-* AWS image with >100G ram and >400G SSD: wget -O - https://raw.githubusercontent.com/ZeLonewolf/planetiler-scripts/main/aws-pmtiles.ssd.sh | bash
+* AWS image with >100G ram and >400G SSD: `wget -O - https://raw.githubusercontent.com/ZeLonewolf/planetiler-scripts/main/aws-pmtiles.ssd.sh | bash`
