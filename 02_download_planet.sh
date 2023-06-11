@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+mkdir -p data/sources
 sudo cp /mnt/efs/wikidata_names.json data/sources/ 
 
 sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx80g' -v "$(pwd)/data":/data \
