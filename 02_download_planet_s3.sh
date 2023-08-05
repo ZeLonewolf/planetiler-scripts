@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p data/sources
+sudo mkdir -p data/sources
 
 sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx80g' -v "$(pwd)/data":/data \
   ghcr.io/onthegomap/planetiler:latest --osm-url=https://planet-pmtiles.s3.us-east-2.amazonaws.com/planet.osd.pbf \
