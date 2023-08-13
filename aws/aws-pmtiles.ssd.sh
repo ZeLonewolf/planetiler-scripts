@@ -7,10 +7,10 @@ sudo apt -y install git
 
 git clone https://github.com/ZeLonewolf/planetiler-scripts.git
 
-planetiler-scripts/00_setup_pmtiles.sh
-planetiler-scripts/01_mount_drive.sh
+planetiler-scripts/aws/00_setup_pmtiles.sh
+planetiler-scripts/aws/01_mount_drive.sh
 
 cd build
 
-../planetiler-scripts/02_download_planet_s3.sh
-../planetiler-scripts/03_render_planet_pmtiles.sh
+../planetiler-scripts/aws/02_download_planet_s3.sh
+../planetiler-scripts/aws/03_render_planet_pmtiles.sh

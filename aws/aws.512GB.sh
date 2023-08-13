@@ -12,14 +12,14 @@ sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,ret
 
 git clone https://github.com/ZeLonewolf/planetiler-scripts.git
 
-planetiler-scripts/00_setup.sh
+planetiler-scripts/aws/00_setup.sh
 
-planetiler-scripts/01_mount_ramdisk350.sh
+planetiler-scripts/aws/01_mount_ramdisk350.sh
 
 cd build
 
-../planetiler-scripts/02_download_planet.sh
-../planetiler-scripts/03_render_planet.sh
-../planetiler-scripts/04_copy_mbtiles.sh
+../planetiler-scripts/aws/02_download_planet.sh
+../planetiler-scripts/aws/03_render_planet.sh
+../planetiler-scripts/aws/04_copy_mbtiles.sh
 
 #sudo shutdown -h now
