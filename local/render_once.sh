@@ -4,8 +4,10 @@
 
 set -x
 
-echo 'Start Render'
 DATE="$(date -u '+%Y-%m-%d %H:%M:%S')"
+echo "Start Render: $DATE"
+
+exit
 
 mkdir -p data/sources
 mkdir -p data/tmp
