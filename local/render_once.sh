@@ -10,7 +10,7 @@ date -u '+%Y-%m-%d %H:%M:%S'
 mkdir -p data/sources
 mkdir -p data/tmp
 
-rm -rf data/source/tmp*.osm.pbf
+rm -rf data/sources/tmp*.osm.pbf
 
 pyosmium-up-to-date -vvvv --size 10000 data/sources/planet.osm.pbf
 
