@@ -5,10 +5,13 @@ trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 sudo touch logs.txt
 sudo tail -f logs.txt | sudo nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
+# Fetch a random joke from the API
+JOKE=$(curl -s -H "Accept: application/json" https://icanhazdadjoke.com/ | jq -r '.joke')
+
 # Read the URL from /tmp/seashells_render
 URL=$(cat /tmp/seashells_render)
 
-./rss_update.sh "Build Started" "Server output: ${URL}"
+./rss_update.sh "Build Started" "Server output: ${URL}. Here's a joke while you wait: ${JOKE}"
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
