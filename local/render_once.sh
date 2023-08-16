@@ -5,7 +5,7 @@
 set -x
 
 echo 'Start Render'
-date -u '+%Y-%m-%d %H:%M:%S'
+DATE="$(date -u '+%Y-%m-%d %H:%M:%S')"
 
 mkdir -p data/sources
 mkdir -p data/tmp
@@ -41,13 +41,13 @@ if [[ ! -f "$PLANET" ]]; then
 fi
 
 echo 'Uploading planet to s3 bucket'
-aws s3 cp "$PLANET" s3://planet-pmtiles/
+aws s3 cp "$PLANET" s3://planet-pmtiles/ --only-show-errors
 
 echo 'Removing local planet file'
 rm -rf "$PLANET"
 
 echo 'Invalidating the CDN cache'
-aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch '{"Paths": {"Quantity": 1, "Items": ["/*"]}, "CallerReference": "invalidation-$(date +%Y%m%d%H%M%S)"}'
+aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch '{"Paths": {"Quantity": 1, "Items": ["/*"]}, "CallerReference": "invalidation-$DATE"}'
 
 echo 'Render Complete'
 date -u '+%Y-%m-%d %H:%M:%S'
