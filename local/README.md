@@ -7,7 +7,7 @@ These scripts are intended for building planetiler on "lesser" local hardware an
 
 Sofware:
 * AWS CLI
-* trickle
+* jq (very optional)
 
 Planet
 * Downloaded into data/source/planet.osm.pbf

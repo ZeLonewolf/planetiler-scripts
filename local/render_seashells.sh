@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
-trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+# Define the lock file
+LOCKFILE="/tmp/planet-render.lock"
+
+# Check if lock file exists
+if [ -e "${LOCKFILE}" ]; then
+  echo "A rendering process is already running."
+  exit 1
+else
+  # Create a lock file
+  touch "${LOCKFILE}"
+
+  # Ensure the lock file is removed when we exit and when we receive signals
+  trap "rm -f ${LOCKFILE}; trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+fi
 
 sudo touch logs.txt
 sudo tail -f logs.txt | sudo nc seashells.io 1337 > /tmp/seashells_render & sleep 10
@@ -19,7 +32,26 @@ run() {
 
   # Check the exit status of render_once.sh
   if [ $? -eq 0 ]; then
-    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}"
+    # Record the end time
+    END_TIME=$(date +%s)
+
+    # Calculate the time difference
+    TIME_DIFF=$((END_TIME - START_TIME))
+
+    # Convert the time difference to hours and minutes
+    HOURS=$((TIME_DIFF / 3600))
+    MINUTES=$(((TIME_DIFF / 60) % 60))
+
+    # Format hours and minutes with singular or plural as appropriate
+    HOUR_TEXT="hours"
+    MINUTE_TEXT="minutes"
+    if [ "$HOURS" -eq 1 ]; then
+      HOUR_TEXT="hour"
+    fi
+    if [ "$MINUTES" -eq 1 ]; then
+       MINUTE_TEXT="minute"
+    fi
+    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}."
   else
     ./rss_update.sh "Build Failed" "Review the build log at ${URL} to find out why."
   fi
