@@ -7,6 +7,7 @@ These scripts are intended for building planetiler on "lesser" local hardware an
 
 Sofware:
 * AWS CLI
+* pyosmium-up-to-date
 * jq (very optional)
 
 Planet
