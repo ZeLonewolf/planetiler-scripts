@@ -49,7 +49,7 @@ echo 'Removing local planet file'
 rm -rf "$PLANET"
 
 echo 'Invalidating the CDN cache'
-aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch '{"Paths": {"Quantity": 1, "Items": ["/*"]}, "CallerReference": "invalidation-$DATE"}'
+aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch '{"Paths": {"Quantity": 1, "Items": ["/*"]}, "CallerReference": "invalidation-'$DATE'"}'
 
 echo 'Render Complete'
 date -u '+%Y-%m-%d %H:%M:%S'

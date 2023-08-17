@@ -51,7 +51,7 @@ run() {
     if [ "$MINUTES" -eq 1 ]; then
        MINUTE_TEXT="minute"
     fi
-    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}."
+    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}."
   else
     ./rss_update.sh "Build Failed" "Review the build log at ${URL} to find out why."
   fi
