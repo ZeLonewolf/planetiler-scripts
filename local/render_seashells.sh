@@ -28,6 +28,7 @@ URL=$(cat /tmp/seashells_render)
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+  START_TIME=$(date +%s)
   ./render_once.sh
 
   # Check the exit status of render_once.sh
