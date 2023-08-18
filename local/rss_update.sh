@@ -14,6 +14,15 @@ CURRENT_DATE=$(date +"%Y-%m-%dT%H:%M:%SZ")
 # Escape HTML special characters in the message
 MESSAGE=$(echo "$MESSAGE" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&apos;/g')
 
+# Check the size of the RSS file
+FILE_SIZE=$(stat -c%s "$RSS_FILE")
+
+# If the size of the RSS file is more than 100KB, remove it
+if [ $FILE_SIZE -gt 102400 ]; then
+  echo "The RSS file is larger than 100KB. Removing the file..."
+  rm $RSS_FILE
+fi
+
 # Check if the RSS file exists
 if [ ! -f $RSS_FILE ]; then
     # If the RSS file doesn't exist, create a new one
@@ -31,6 +40,7 @@ fi
 xmlstarlet ed --inplace \
     -s "//channel" -t elem -n "item" -v "" \
     -s "//channel/item[last()]" -t elem -n "title" -v "$TITLE" \
+    -s "//channel/item[last()]" -t elem -n "author" -v "zelonewolf@gmail.com" \
     -s "//channel/item[last()]" -t elem -n "pubDate" -v "$CURRENT_DATE" \
     -s "//channel/item[last()]" -t elem -n "description" -v "$MESSAGE" \
     $RSS_FILE
