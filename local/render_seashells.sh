@@ -18,9 +18,6 @@ fi
 sudo touch logs.txt
 sudo tail -f logs.txt | sudo nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
-# Read the URL from /tmp/seashells_render
-URL=$(cat /tmp/seashells_render)
-
 # Get the size of the file in bytes
 OSM_PLANET_SIZE=$(stat -c%s "data/sources/planet.osm.pbf")
 
@@ -30,7 +27,7 @@ OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
 # Get the directory of the current script
 DIR="$(dirname "$0")"
 
-"$DIR/rss_update.sh" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes. Server output: ${URL}."
+"$DIR/rss_update.sh" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes."
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
@@ -67,7 +64,7 @@ run() {
 
     "$DIR/rss_update.sh" "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes"
   else
-    "$DIR/rss_update.sh" "Build Failed" "Review the build log at ${URL} to find out why."
+    "$DIR/rss_update.sh" "Build Failed" "Review the build log to find out why."
   fi
 }
 

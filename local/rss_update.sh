@@ -37,12 +37,15 @@ if [ ! -f $RSS_FILE ]; then
 </rss>' > $RSS_FILE
 fi
 
+# Read the URL from /tmp/seashells_render
+URL=$(cat /tmp/seashells_render)
+
 # Add the new item entry to the RSS file
 xmlstarlet ed --inplace \
     -s "//channel" -t elem -n "item" -v "" \
     -s "//channel/item[last()]" -t elem -n "title" -v "$TITLE" \
     -s "//channel/item[last()]" -t elem -n "author" -v "zelonewolf@gmail.com" \
-    -s "//channel/item[last()]" -t elem -n "link" -v "https://tile.ourmap.us/inspect.html" \
+    -s "//channel/item[last()]" -t elem -n "link" -v "$URL" \
     -s "//channel/item[last()]" -t elem -n "pubDate" -v "$CURRENT_DATE" \
     -s "//channel/item[last()]" -t elem -n "content:encoded" -v "$MESSAGE" \
     -i "//channel/item[last()]/content:encoded" -t attr -n "type" -v "html" \
