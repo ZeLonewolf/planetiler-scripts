@@ -29,7 +29,8 @@ if [ ! -f $RSS_FILE ]; then
     echo '<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
-    <title>ourmap.us Planet Build</title>
+    <author><name>Brian Sperlongano</name></author>
+    <title type="text">ourmap.us Planet Build</title>
     <link>https://tile.ourmap.us/</link>
     <description>Planet build status</description>
 </channel>
@@ -41,8 +42,10 @@ xmlstarlet ed --inplace \
     -s "//channel" -t elem -n "item" -v "" \
     -s "//channel/item[last()]" -t elem -n "title" -v "$TITLE" \
     -s "//channel/item[last()]" -t elem -n "author" -v "zelonewolf@gmail.com" \
+    -s "//channel/item[last()]" -t elem -n "link" -v "https://tile.ourmap.us/inspect.html" \
     -s "//channel/item[last()]" -t elem -n "pubDate" -v "$CURRENT_DATE" \
-    -s "//channel/item[last()]" -t elem -n "description" -v "$MESSAGE" \
+    -s "//channel/item[last()]" -t elem -n "content:encoded" -v "$MESSAGE" \
+    -i "//channel/item[last()]/content:encoded" -t attr -n "type" -v "html" \
     $RSS_FILE
 
 echo "New entry added to $RSS_FILE"

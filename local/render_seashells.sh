@@ -18,13 +18,16 @@ fi
 sudo touch logs.txt
 sudo tail -f logs.txt | sudo nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
-# Fetch a random joke from the API
-JOKE=$(curl -s -H "Accept: application/json" https://icanhazdadjoke.com/ | jq -r '.joke')
-
 # Read the URL from /tmp/seashells_render
 URL=$(cat /tmp/seashells_render)
 
-./rss_update.sh "Build Started" "Server output: ${URL}. Here's a joke while you wait: ${JOKE}"
+# Get the size of the file in bytes
+OSM_PLANET_SIZE=$(stat -c%s "data/sources/planet.osm.pbf")
+
+# Print the size with comma separators
+OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
+
+./rss_update.sh "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes. Server output: ${URL}."
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
@@ -52,7 +55,14 @@ run() {
     if [ "$MINUTES" -eq 1 ]; then
        MINUTE_TEXT="minute"
     fi
-    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}."
+
+    # Get the size of the file in bytes
+    PMTILES_PLANET_SIZE=$(stat -c%s "data/planet.pmtiles")
+
+    # Print the size with comma separators
+    PMTILES_PLANET_SIZE=$(printf "%'d" $PMTILES_PLANET_SIZE)
+
+    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes"
   else
     ./rss_update.sh "Build Failed" "Review the build log at ${URL} to find out why."
   fi
