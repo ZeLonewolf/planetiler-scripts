@@ -27,12 +27,15 @@ OSM_PLANET_SIZE=$(stat -c%s "data/sources/planet.osm.pbf")
 # Print the size with comma separators
 OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
 
-./rss_update.sh "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes. Server output: ${URL}."
+# Get the directory of the current script
+DIR="$(dirname "$0")"
+
+"$DIR/rss_update.sh" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes. Server output: ${URL}."
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
   START_TIME=$(date +%s)
-  ./render_once.sh
+  "$DIR/render_once.sh"
 
   # Check the exit status of render_once.sh
   if [ $? -eq 0 ]; then
@@ -62,9 +65,9 @@ run() {
     # Print the size with comma separators
     PMTILES_PLANET_SIZE=$(printf "%'d" $PMTILES_PLANET_SIZE)
 
-    ./rss_update.sh "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes"
+    "$DIR/rss_update.sh" "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes"
   else
-    ./rss_update.sh "Build Failed" "Review the build log at ${URL} to find out why."
+    "$DIR/rss_update.sh" "Build Failed" "Review the build log at ${URL} to find out why."
   fi
 }
 

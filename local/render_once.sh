@@ -4,15 +4,18 @@
 
 set -x
 
+# Get the directory of the current script
+DIR="$(dirname "$0")"
+
 DATE="$(date -u '+%Y-%m-%d %H:%M:%S')"
 echo "Start Render: $DATE"
 
-mkdir -p data/sources
-mkdir -p data/tmp
+mkdir -p "$DIR/data/sources"
+mkdir -p "$DIR/data/tmp"
 
-rm -rf data/sources/tmp*.osm.pbf
+rm -rf "$DIR/data/sources/tmp*.osm.pbf"
 
-pyosmium-up-to-date -vvvv --size 10000 data/sources/planet.osm.pbf
+pyosmium-up-to-date -vvvv --size 10000 "$DIR/data/sources/planet.osm.pbf"
 
 docker run -e JAVA_TOOL_OPTIONS='-Xmx2g' -v "$(pwd)/data":/data \
   -u $(id -u ${USER}):$(id -g ${USER}) \
@@ -20,11 +23,11 @@ docker run -e JAVA_TOOL_OPTIONS='-Xmx2g' -v "$(pwd)/data":/data \
   --download --download-only --only-fetch-wikidata
 
 # Remove default downloaded OSM file
-rm -rf data/sources/monaco.osm.pbf
+rm -rf "$DIR/data/sources/monaco.osm.pbf"
 
-PLANET="data/planet.pmtiles"
+PLANET="$DIR/data/planet.pmtiles"
 
-sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$(pwd)/data":/data \
+sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$DIR/data":/data \
     ghcr.io/onthegomap/planetiler:latest --area=planet --bounds=world \
     --output="/$PLANET" \
     --transportation_name_size_for_shield \
