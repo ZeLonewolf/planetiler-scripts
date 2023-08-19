@@ -30,7 +30,7 @@ if [ ! -f $RSS_FILE ]; then
 <rss version="2.0">
 <channel>
     <author><name>Brian Sperlongano</name></author>
-    <title type="text">ourmap.us Planet Build</title>
+    <title type="text">tile.ourmap.us Planet Build</title>
     <link>https://tile.ourmap.us/</link>
     <description>Planet build status</description>
 </channel>
