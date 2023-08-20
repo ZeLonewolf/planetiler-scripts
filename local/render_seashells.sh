@@ -15,19 +15,21 @@ else
   trap "rm -f ${LOCKFILE}; trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 fi
 
-sudo touch logs.txt
-sudo tail -f logs.txt | sudo nc seashells.io 1337 > /tmp/seashells_render & sleep 10
-
-# Get the size of the file in bytes
-OSM_PLANET_SIZE=$(stat -c%s "data/sources/planet.osm.pbf")
-
-# Print the size with comma separators
-OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
+touch logs.txt
+tail -f logs.txt | nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
 # Get the directory of the current script
 DIR="$(dirname "$0")"
 
-"$DIR/rss_update.sh" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes."
+# Get the size of the file in bytes
+OSM_PLANET_SIZE=$(stat -c%s "$DIR/data/sources/planet.osm.pbf")
+
+# Print the size with comma separators
+OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
+
+RSS_FILE="$DIR/rss.xml"
+
+"$DIR/rss_update.sh" "$RSS_FILE" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes."
 
 run() {
   TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
@@ -57,15 +59,15 @@ run() {
     fi
 
     # Get the size of the file in bytes
-    PMTILES_PLANET_SIZE=$(stat -c%s "data/planet.pmtiles")
+    PMTILES_PLANET_SIZE=$(stat -c%s "$DIR/data/planet.pmtiles")
 
     # Print the size with comma separators
     PMTILES_PLANET_SIZE=$(printf "%'d" $PMTILES_PLANET_SIZE)
 
-    "$DIR/rss_update.sh" "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes"
+    "$DIR/rss_update.sh" "$RSS_FILE" "Build Complete" "Tiles are up to date as of ${TIMESTAMP}Z. Render took ${HOURS} ${HOUR_TEXT} and ${MINUTES} ${MINUTE_TEXT}. The planet PMTiles file is ${PMTILES_PLANET_SIZE} bytes."
   else
-    "$DIR/rss_update.sh" "Build Failed" "Review the build log to find out why."
+    "$DIR/rss_update.sh" "$RSS_FILE" "Build Failed" "Review the build log to find out why."
   fi
 }
 
-run 2>&1 | sudo tee -a logs.txt
+run 2>&1 | tee -a logs.txt

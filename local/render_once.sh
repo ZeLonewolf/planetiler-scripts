@@ -27,7 +27,7 @@ rm -rf "$DIR/data/sources/monaco.osm.pbf"
 
 PLANET="$DIR/data/planet.pmtiles"
 
-sudo docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$DIR/data":/data \
+docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$DIR/data":/data \
     ghcr.io/onthegomap/planetiler:latest --area=planet --bounds=world \
     --output="/$PLANET" \
     --transportation_name_size_for_shield \
@@ -50,7 +50,7 @@ echo 'Removing local planet file'
 rm -rf "$PLANET"
 
 echo 'Invalidating the CDN cache'
-aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch '{"Paths": {"Quantity": 1, "Items": ["/*"]}, "CallerReference": "invalidation-'$DATE'"}'
+aws cloudfront create-invalidation --distribution-id E1E7N0LWX2WY4E --invalidation-batch "{\"Paths\": {\"Quantity\": 1, \"Items\": [\"/*\"]}, \"CallerReference\": \"invalidation-$DATE\"}"
 
 echo 'Render Complete'
 date -u '+%Y-%m-%d %H:%M:%S'
