@@ -28,7 +28,7 @@ PLANET="$DIR/data/planet.pmtiles"
 
 docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$DIR/data":/data \
     ghcr.io/onthegomap/planetiler:latest --area=planet --bounds=world \
-    --output="planet.pmtiles" \
+    --output="/data/planet.pmtiles" \
     --transportation_name_size_for_shield \
     --transportation_name_limit_merge \
     --boundary-osm-only \
