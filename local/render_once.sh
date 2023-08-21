@@ -17,8 +17,7 @@ rm -rf "$DIR/data/sources/tmp*.osm.pbf"
 
 pyosmium-up-to-date -vvvv --size 10000 "$DIR/data/sources/planet.osm.pbf"
 
-docker run -e JAVA_TOOL_OPTIONS='-Xmx2g' -v "$(pwd)/data":/data \
-  -u $(id -u ${USER}):$(id -g ${USER}) \
+docker run -e JAVA_TOOL_OPTIONS='-Xmx2g' -v "$DIR/data":/data \
   ghcr.io/onthegomap/planetiler:latest \
   --download --download-only --only-fetch-wikidata
 
