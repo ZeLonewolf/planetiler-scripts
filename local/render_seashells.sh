@@ -16,8 +16,11 @@ else
 fi
 
 mkdir -p /var/log/render
-touch logs.txt
-tail -f logs.txt | nc seashells.io 1337 > /tmp/seashells_render & sleep 10
+LOG_TIMESTAMP=$(date +%Y%m%d%H%M%S)
+LOG_FILE="/var/log/render/logs_$LOG_TIMESTAMP.txt"
+
+touch "$LOG_FILE"
+tail -f "$LOG_FILE" | nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
 # Get the directory of the current script
 DIR="$(dirname "$0")"
