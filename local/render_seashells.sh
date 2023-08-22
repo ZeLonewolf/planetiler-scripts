@@ -28,6 +28,7 @@ OSM_PLANET_SIZE=$(stat -c%s "$DIR/data/sources/planet.osm.pbf")
 OSM_PLANET_SIZE=$(printf "%'d" $OSM_PLANET_SIZE)
 
 RSS_FILE="$DIR/rss.xml"
+PLANET="$DIR/data/planet.pmtiles"
 
 "$DIR/rss_update.sh" "$RSS_FILE" "Build Started." "The OSM planet file is ${OSM_PLANET_SIZE} bytes."
 
@@ -59,7 +60,7 @@ run() {
     fi
 
     # Get the size of the file in bytes
-    PMTILES_PLANET_SIZE=$(stat -c%s "$DIR/data/planet.pmtiles")
+    PMTILES_PLANET_SIZE=$(stat -c%s "$PLANET")
 
     # Print the size with comma separators
     PMTILES_PLANET_SIZE=$(printf "%'d" $PMTILES_PLANET_SIZE)
@@ -68,6 +69,9 @@ run() {
   else
     "$DIR/rss_update.sh" "$RSS_FILE" "Build Failed" "Review the build log to find out why."
   fi
+
+  echo 'Removing local planet file'
+  rm -rf "$PLANET"
 }
 
 run 2>&1 | tee -a logs.txt
