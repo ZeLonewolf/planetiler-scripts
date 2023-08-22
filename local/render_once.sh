@@ -12,6 +12,7 @@ echo "Start Render: $DATE"
 
 mkdir -p "$DIR/data/sources"
 mkdir -p "$DIR/data/tmp"
+mkdir -p "/var/log/render"
 
 rm -rf "$DIR/data/sources/tmp*.osm.pbf"
 
