@@ -15,6 +15,7 @@ else
   trap "rm -f ${LOCKFILE}; trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 fi
 
+mkdir -p /var/log/render
 touch logs.txt
 tail -f logs.txt | nc seashells.io 1337 > /tmp/seashells_render & sleep 10
 
