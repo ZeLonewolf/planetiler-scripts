@@ -1,0 +1,96 @@
+schema_name: OSMUS Trails
+schema_description: A map of trails
+attribution: <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>
+sources:
+  osm:
+    type: osm
+    url: geofabrik:rhode-island
+tag_mappings:
+  width: integer
+  informal: boolean
+layers:
+  - id: trail
+    features:
+      - source: osm
+        geometry: line
+        min_zoom: 9
+        include_when:
+          highway:
+            - path
+            - footway
+            - steps
+            - cycleway
+            - bridleway
+            - track
+            - via_ferrata
+        exclude_when:
+          footway: __any__
+          indoor: __any__
+        attributes:
+          - key: highway
+            tag_value: highway
+          - key: name
+            tag_value: name
+          - key: access
+            tag_value: access
+          - key: foot
+            tag_value: foot
+          - key: bicycle
+            tag_value: bicycle
+          - key: horse
+            tag_value: horse
+          - key: dog
+            tag_value: dog
+          - key: ski
+            tag_value: ski
+          - key: inline_skates
+            tag_value: inline_skates
+          - key: vehicle
+            tag_value: vehicle
+          - key: motor_vehicle
+            tag_value: motor_vehicle
+          - key: atv
+            tag_value: atv
+          - key: motorcycle
+            tag_value: motorcycle
+          - key: moped
+            tag_value: moped
+          - key: motorcar
+            tag_value: motorcar
+          - key: oneway
+            tag_value: oneway
+          - key: incline
+            tag_value: incline
+          - key: width
+            tag_value: width
+          - key: mtb_scale
+            tag_value: mtb:scale
+          - key: surface
+            tag_value: surface
+          - key: smoothness
+            tag_value: smoothness
+          - key: tracktype
+            tag_value: tracktype
+          - key: trail_visibility
+            tag_value: trail_visibility
+          - key: sac_scale
+            tag_value: sca_scale
+          - key: informal
+            tag_value: informal
+          - key: operator
+            tag_value: operator
+          - key: operator_type
+            tag_value: operator:type
+          - key: operator_wikidata
+            tag_value: operator:wikidata
+          - key: wikidata
+            tag_value: wikidata
+    tile_post_process:
+      merge_line_strings:
+        min_length: 1
+        tolerance: 1
+        buffer: 5
+args:
+  area:
+    description: Geofabrik area to download
+    default: rhode-island
