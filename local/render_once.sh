@@ -50,6 +50,7 @@ for file in "$DIR/data/layers/"*.yml; do
 
     docker run -e JAVA_TOOL_OPTIONS='-Xmx24g' -v "$DIR/data":/data \
         ghcr.io/onthegomap/planetiler:latest generate-custom \
+        --area=planet --bounds=world \
         --output="$DIR/data/$layer_name.pmtiles" \
         --schema="/data/layers/$layer_name.yml" \
         --storage=mmap --nodemap-type=array \
