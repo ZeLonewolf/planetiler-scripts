@@ -18,6 +18,9 @@ rm -rf "$DIR/data/sources/tmp*.osm.pbf"
 
 pyosmium-up-to-date -vvvv --size 10000 "$DIR/data/sources/planet.osm.pbf"
 
+# Remove excess docker files from past runs
+docker system prune
+
 # Make sure we have the latest planetiler
 docker pull ghcr.io/onthegomap/planetiler:latest
 
