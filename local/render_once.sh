@@ -25,7 +25,7 @@ docker system prune
 docker pull ghcr.io/onthegomap/planetiler:latest
 
 docker run -e JAVA_TOOL_OPTIONS='-Xmx2g' -v "$DIR/data":/data \
-  ghcr.io/onthegomap/planetiler:latest \
+  ghcr.io/onthegomap/planetiler:latest --area=planet \
   --download --download-only --only-fetch-wikidata
 
 # Remove default downloaded OSM file
