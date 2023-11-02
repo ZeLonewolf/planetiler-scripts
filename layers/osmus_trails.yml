@@ -13,7 +13,7 @@ layers:
     features:
       - source: osm
         geometry: line
-        min_zoom: 9
+        min_zoom: 7
         include_when:
           highway:
             - path
@@ -23,6 +23,16 @@ layers:
             - bridleway
             - track
             - via_ferrata
+          __all__:
+            # we only care about tracks if they have some trail access tag
+            - highway: track
+            - __any__:
+              foot: __any__
+              bicycle: __any__
+              horse: __any__
+              atv: __any__
+              ski: __any__
+              ski:nordic: __any__
         exclude_when:
           footway: __any__
           indoor: __any__
@@ -31,8 +41,34 @@ layers:
             tag_value: highway
           - key: name
             tag_value: name
+          - key: alt_name
+            tag_value: alt_name
+          - key: short_name
+            tag_value: short_name
+          - key: official_name
+            tag_value: official_name
+          - key: description
+            tag_value: description
+          - key: note
+            tag_value: note
+          - key: fixme
+            tag_value: fixme
+          - key: trailblazed
+            tag_value: trailblazed
+          - key: symbol
+            tag_value: symbol
+          - key: colour
+            tag_value: colour
           - key: access
             tag_value: access
+          - key: toll
+            tag_value: toll
+          - key: fee
+            tag_value: fee
+            type: string
+          - key: seasonal
+            tag_value: seasonal
+            type: string
           - key: foot
             tag_value: foot
           - key: bicycle
@@ -43,6 +79,8 @@ layers:
             tag_value: dog
           - key: ski
             tag_value: ski
+          - key: ski:nordic
+            tag_value: ski:nordic
           - key: inline_skates
             tag_value: inline_skates
           - key: vehicle
@@ -77,6 +115,7 @@ layers:
             tag_value: sca_scale
           - key: informal
             tag_value: informal
+            type: string
           - key: operator
             tag_value: operator
           - key: operator_type
@@ -90,6 +129,62 @@ layers:
         min_length: 1
         tolerance: 1
         buffer: 5
+- id: trail_poi
+    features:
+      - source: osm
+        geometry: point
+        min_zoom: 10
+        include_when:
+          highway:
+            - trailhead
+        attributes:
+          - key: highway
+            tag_value: highway
+          - key: name
+            tag_value: name
+          - key: alt_name
+            tag_value: alt_name
+          - key: short_name
+            tag_value: short_name
+          - key: official_name
+            tag_value: official_name
+          - key: description
+            tag_value: description
+          - key: note
+            tag_value: note
+          - key: fixme
+            tag_value: fixme
+          - key: access
+            tag_value: access
+          - key: toll
+            tag_value: toll
+            type: string
+          - key: fee
+            tag_value: fee
+            type: string
+          - key: charge
+            tag_value: charge
+          - key: seasonal
+            tag_value: seasonal
+            type: string
+          - key: website
+            tag_value: website
+          - key: phone
+            tag_value: phone
+          - key: drinking_water
+            tag_value: drinking_water
+            type: string
+          - key: bin
+            tag_value: bin
+            type: string
+          - key: operator
+            tag_value: operator
+          - key: operator_type
+            tag_value: operator:type
+          - key: operator_wikidata
+            tag_value: operator:wikidata
+          - key: wikidata
+            tag_value: wikidata
 args:
   area:
     description: Geofabrik area to download
