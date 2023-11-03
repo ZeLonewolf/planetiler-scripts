@@ -4,7 +4,7 @@ attribution: <a href="https://www.openstreetmap.org/copyright" target="_blank">&
 sources:
   osm:
     type: osm
-    url: geofabrik:rhode-island
+    local_path: data/sources/planet.osm.pbf
 tag_mappings:
   width: integer
   informal: boolean
