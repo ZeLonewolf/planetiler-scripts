@@ -39,6 +39,8 @@ layers:
         attributes:
           - key: highway
             tag_value: highway
+          - key: piste:type
+            tag_value: piste:type
           - key: name
             tag_value: name
           - key: alt_name
@@ -53,8 +55,11 @@ layers:
             tag_value: note
           - key: fixme
             tag_value: fixme
+          - key: source
+            tag_value: source
           - key: trailblazed
             tag_value: trailblazed
+            type: string
           - key: symbol
             tag_value: symbol
           - key: colour
@@ -71,6 +76,7 @@ layers:
             type: string
           - key: foot
             tag_value: foot
+            type: string
           - key: bicycle
             tag_value: bicycle
           - key: horse
@@ -95,13 +101,29 @@ layers:
             tag_value: moped
           - key: motorcar
             tag_value: motorcar
+          - key: wheelchair
+            tag_value: wheelchair
+            type: string
+          - key: wheelchair:description
+            tag_value: wheelchair:description
+          - key: ramp
+            tag_value: ramp
+            type: string
+          - key: ramp:bicycle
+            tag_value: ramp:bicycle
+          - key: ramp:stroller
+            tag_value: ramp:stroller
+            type: string
+          - key: ramp:wheelchair
+            tag_value: ramp:wheelchair
           - key: oneway
             tag_value: oneway
+            type: string
           - key: incline
             tag_value: incline
           - key: width
             tag_value: width
-          - key: mtb_scale
+          - key: mtb:scale
             tag_value: mtb:scale
           - key: surface
             tag_value: surface
@@ -118,9 +140,9 @@ layers:
             type: string
           - key: operator
             tag_value: operator
-          - key: operator_type
+          - key: operator:type
             tag_value: operator:type
-          - key: operator_wikidata
+          - key: operator:wikidata
             tag_value: operator:wikidata
           - key: wikidata
             tag_value: wikidata
@@ -129,7 +151,7 @@ layers:
         min_length: 1
         tolerance: 1
         buffer: 5
-- id: trail_poi
+  - id: trail_poi
     features:
       - source: osm
         geometry: point
@@ -137,6 +159,8 @@ layers:
         include_when:
           highway:
             - trailhead
+          amenity:
+            - ranger_station
         attributes:
           - key: highway
             tag_value: highway
@@ -154,8 +178,22 @@ layers:
             tag_value: note
           - key: fixme
             tag_value: fixme
+          - key: source
+            tag_value: source
           - key: access
             tag_value: access
+          - key: wheelchair
+            tag_value: wheelchair
+            type: string
+          - key: wheelchair:description
+            tag_value: wheelchair:description
+          - key: dog
+            tag_value: dog
+            type: string
+          - key: opening_hours
+            tag_value: opening_hours
+          - key: ele
+            tag_value: ele
           - key: toll
             tag_value: toll
             type: string
@@ -177,14 +215,47 @@ layers:
           - key: bin
             tag_value: bin
             type: string
+          - key: toilets
+            tag_value: toilets
+            type: string
+          - key: toilets:access
+            tag_value: toilets:access
+            type: string
+          - key: toilets:wheelchair
+            tag_value: toilets:wheelchair
+            type: string
           - key: operator
             tag_value: operator
-          - key: operator_type
+          - key: operator:type
             tag_value: operator:type
-          - key: operator_wikidata
+          - key: operator:wikidata
             tag_value: operator:wikidata
           - key: wikidata
             tag_value: wikidata
+          - key: addr:housenumber
+            tag_value: addr:housenumber
+          - key: addr:street
+            tag_value: addr:street
+          - key: addr:city
+            tag_value: addr:city
+          - key: addr:postcode
+            tag_value: addr:postcode
+          - key: addr:state
+            tag_value: addr:state
+          - key: addr:country
+            tag_value: addr:country
+          - key: addr:district
+            tag_value: addr:district
+          - key: addr:province
+            tag_value: addr:province
+          - key: addr:suburb
+            tag_value: addr:suburb
+          - key: addr:place
+            tag_value: addr:place
+          - key: addr:hamlet
+            tag_value: addr:hamlet
+          - key: addr:neighbourhood
+            tag_value: addr:neighbourhood
 args:
   area:
     description: Geofabrik area to download
