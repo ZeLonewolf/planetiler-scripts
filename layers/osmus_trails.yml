@@ -129,7 +129,7 @@ layers:
         min_length: 1
         tolerance: 1
         buffer: 5
-- id: trail_poi
+  - id: trail_poi
     features:
       - source: osm
         geometry: point
