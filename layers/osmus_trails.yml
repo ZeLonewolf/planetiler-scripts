@@ -5,9 +5,6 @@ sources:
   osm:
     type: osm
     local_path: data/sources/planet.osm.pbf
-tag_mappings:
-  width: integer
-  informal: boolean
 layers:
   - id: trail
     features:
@@ -16,25 +13,28 @@ layers:
         min_zoom: 7
         include_when:
           highway:
-            - path
-            - footway
-            - steps
-            - cycleway
             - bridleway
+            - cycleway
+            - footway
+            - path
+            - steps
             - track
             - via_ferrata
           __all__:
             # we only care about tracks if they have some trail access tag
             - highway: track
             - __any__:
-              foot: __any__
-              bicycle: __any__
-              horse: __any__
               atv: __any__
+              bicycle: __any__
+              dog: __any__
+              foot: __any__
+              horse: __any__  
               ski: __any__
               ski:nordic: __any__
+              wheelchair: __any__
         exclude_when:
           footway: __any__
+          golf: cartpath
           indoor: __any__
         attributes:
           - key: highway
@@ -59,7 +59,6 @@ layers:
             tag_value: source
           - key: trailblazed
             tag_value: trailblazed
-            type: string
           - key: symbol
             tag_value: symbol
           - key: colour
@@ -70,13 +69,10 @@ layers:
             tag_value: toll
           - key: fee
             tag_value: fee
-            type: string
           - key: seasonal
             tag_value: seasonal
-            type: string
           - key: foot
             tag_value: foot
-            type: string
           - key: bicycle
             tag_value: bicycle
           - key: horse
@@ -101,30 +97,38 @@ layers:
             tag_value: moped
           - key: motorcar
             tag_value: motorcar
+          - key: golf_cart
+            tag_value: golf_cart
           - key: wheelchair
             tag_value: wheelchair
-            type: string
           - key: wheelchair:description
             tag_value: wheelchair:description
           - key: ramp
             tag_value: ramp
-            type: string
           - key: ramp:bicycle
             tag_value: ramp:bicycle
           - key: ramp:stroller
             tag_value: ramp:stroller
-            type: string
           - key: ramp:wheelchair
             tag_value: ramp:wheelchair
+          - key: speed_pedelec
+            tag_value: speed_pedelec
           - key: oneway
             tag_value: oneway
-            type: string
+          - key: oneway:bicycle
+            tag_value: oneway:bicycle
           - key: incline
             tag_value: incline
           - key: width
             tag_value: width
+          - key: mtb
+            tag_value: mtb
           - key: mtb:scale
             tag_value: mtb:scale
+          - key: mtb:scale:uphill
+            tag_value: mtb:scale:uphill
+          - key: mtb:scale:imba
+            tag_value: mtb:scale:imba
           - key: surface
             tag_value: surface
           - key: smoothness
@@ -134,10 +138,9 @@ layers:
           - key: trail_visibility
             tag_value: trail_visibility
           - key: sac_scale
-            tag_value: sca_scale
+            tag_value: sac_scale
           - key: informal
             tag_value: informal
-            type: string
           - key: operator
             tag_value: operator
           - key: operator:type
@@ -149,7 +152,7 @@ layers:
     tile_post_process:
       merge_line_strings:
         min_length: 1
-        tolerance: 1
+        tolerance: 0.1
         buffer: 5
   - id: trail_poi
     features:
@@ -184,46 +187,36 @@ layers:
             tag_value: access
           - key: wheelchair
             tag_value: wheelchair
-            type: string
           - key: wheelchair:description
             tag_value: wheelchair:description
           - key: dog
             tag_value: dog
-            type: string
           - key: opening_hours
             tag_value: opening_hours
           - key: ele
             tag_value: ele
           - key: toll
             tag_value: toll
-            type: string
           - key: fee
             tag_value: fee
-            type: string
           - key: charge
             tag_value: charge
           - key: seasonal
             tag_value: seasonal
-            type: string
           - key: website
             tag_value: website
           - key: phone
             tag_value: phone
           - key: drinking_water
             tag_value: drinking_water
-            type: string
           - key: bin
             tag_value: bin
-            type: string
           - key: toilets
             tag_value: toilets
-            type: string
           - key: toilets:access
             tag_value: toilets:access
-            type: string
           - key: toilets:wheelchair
             tag_value: toilets:wheelchair
-            type: string
           - key: operator
             tag_value: operator
           - key: operator:type
