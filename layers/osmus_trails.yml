@@ -57,6 +57,16 @@ layers:
             tag_value: fixme
           - key: source
             tag_value: source
+          - key: bridge
+            tag_value: bridge
+          - key: ford
+            tag_value: ford
+          - key: embankment
+            tag_value: embankment
+          - key: cutting
+            tag_value: cutting
+          - key: tunnel
+            tag_value: tunnel
           - key: trailblazed
             tag_value: trailblazed
           - key: symbol
@@ -149,9 +159,45 @@ layers:
             tag_value: operator:wikidata
           - key: wikidata
             tag_value: wikidata
+  - id: trail_name
+    features:
+      - source: osm
+        geometry: line
+        min_zoom: 10
+        include_when:
+          __all__:
+            name: __any__
+            __any__:
+              highway:
+                - bridleway
+                - cycleway
+                - footway
+                - path
+                - steps
+                - track
+                - via_ferrata
+              __all__:
+                # we only care about tracks if they have some trail access tag
+                - highway: track
+                - __any__:
+                  atv: __any__
+                  bicycle: __any__
+                  dog: __any__
+                  foot: __any__
+                  horse: __any__  
+                  ski: __any__
+                  ski:nordic: __any__
+                  wheelchair: __any__
+        exclude_when:
+          footway: __any__
+          golf: cartpath
+          indoor: __any__
+        attributes:
+          - key: name
+            tag_value: name
     tile_post_process:
       merge_line_strings:
-        min_length: 1
+        min_length: 10
         tolerance: 0.1
         buffer: 5
   - id: trail_poi
