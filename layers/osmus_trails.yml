@@ -37,6 +37,8 @@ layers:
           golf: cartpath
           indoor: __any__
         attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
           - key: highway
             tag_value: highway
           - key: piste:type
@@ -211,6 +213,8 @@ layers:
           amenity:
             - ranger_station
         attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
           - key: highway
             tag_value: highway
           - key: name
