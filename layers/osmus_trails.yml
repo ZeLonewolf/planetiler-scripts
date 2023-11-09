@@ -10,7 +10,7 @@ layers:
     features:
       - source: osm
         geometry: line
-        min_zoom: 7
+        min_zoom: 5
         include_when:
           highway:
             - bridleway
@@ -43,30 +43,10 @@ layers:
             tag_value: highway
           - key: piste:type
             tag_value: piste:type
-          - key: name
-            tag_value: name
-          - key: alt_name
-            tag_value: alt_name
-          - key: short_name
-            tag_value: short_name
-          - key: official_name
-            tag_value: official_name
-          - key: description
-            tag_value: description
-          - key: note
-            tag_value: note
-          - key: fixme
-            tag_value: fixme
-          - key: source
-            tag_value: source
           - key: bridge
             tag_value: bridge
           - key: ford
             tag_value: ford
-          - key: embankment
-            tag_value: embankment
-          - key: cutting
-            tag_value: cutting
           - key: tunnel
             tag_value: tunnel
           - key: trailblazed
@@ -79,10 +59,6 @@ layers:
             tag_value: access
           - key: toll
             tag_value: toll
-          - key: fee
-            tag_value: fee
-          - key: seasonal
-            tag_value: seasonal
           - key: foot
             tag_value: foot
           - key: bicycle
@@ -109,22 +85,8 @@ layers:
             tag_value: moped
           - key: motorcar
             tag_value: motorcar
-          - key: golf_cart
-            tag_value: golf_cart
           - key: wheelchair
             tag_value: wheelchair
-          - key: wheelchair:description
-            tag_value: wheelchair:description
-          - key: ramp
-            tag_value: ramp
-          - key: ramp:bicycle
-            tag_value: ramp:bicycle
-          - key: ramp:stroller
-            tag_value: ramp:stroller
-          - key: ramp:wheelchair
-            tag_value: ramp:wheelchair
-          - key: speed_pedelec
-            tag_value: speed_pedelec
           - key: oneway
             tag_value: oneway
           - key: oneway:bicycle
@@ -135,12 +97,6 @@ layers:
             tag_value: width
           - key: mtb
             tag_value: mtb
-          - key: mtb:scale
-            tag_value: mtb:scale
-          - key: mtb:scale:uphill
-            tag_value: mtb:scale:uphill
-          - key: mtb:scale:imba
-            tag_value: mtb:scale:imba
           - key: surface
             tag_value: surface
           - key: smoothness
@@ -155,12 +111,6 @@ layers:
             tag_value: informal
           - key: operator
             tag_value: operator
-          - key: operator:type
-            tag_value: operator:type
-          - key: operator:wikidata
-            tag_value: operator:wikidata
-          - key: wikidata
-            tag_value: wikidata
   - id: trail_name
     features:
       - source: osm
@@ -206,7 +156,7 @@ layers:
     features:
       - source: osm
         geometry: point
-        min_zoom: 10
+        min_zoom: 7
         include_when:
           highway:
             - trailhead
@@ -219,86 +169,12 @@ layers:
             tag_value: highway
           - key: name
             tag_value: name
-          - key: alt_name
-            tag_value: alt_name
-          - key: short_name
-            tag_value: short_name
-          - key: official_name
-            tag_value: official_name
-          - key: description
-            tag_value: description
-          - key: note
-            tag_value: note
-          - key: fixme
-            tag_value: fixme
-          - key: source
-            tag_value: source
           - key: access
             tag_value: access
           - key: wheelchair
             tag_value: wheelchair
-          - key: wheelchair:description
-            tag_value: wheelchair:description
-          - key: dog
-            tag_value: dog
-          - key: opening_hours
-            tag_value: opening_hours
-          - key: ele
-            tag_value: ele
-          - key: toll
-            tag_value: toll
-          - key: fee
-            tag_value: fee
-          - key: charge
-            tag_value: charge
-          - key: seasonal
-            tag_value: seasonal
-          - key: website
-            tag_value: website
-          - key: phone
-            tag_value: phone
-          - key: drinking_water
-            tag_value: drinking_water
-          - key: bin
-            tag_value: bin
-          - key: toilets
-            tag_value: toilets
-          - key: toilets:access
-            tag_value: toilets:access
-          - key: toilets:wheelchair
-            tag_value: toilets:wheelchair
           - key: operator
             tag_value: operator
-          - key: operator:type
-            tag_value: operator:type
-          - key: operator:wikidata
-            tag_value: operator:wikidata
-          - key: wikidata
-            tag_value: wikidata
-          - key: addr:housenumber
-            tag_value: addr:housenumber
-          - key: addr:street
-            tag_value: addr:street
-          - key: addr:city
-            tag_value: addr:city
-          - key: addr:postcode
-            tag_value: addr:postcode
-          - key: addr:state
-            tag_value: addr:state
-          - key: addr:country
-            tag_value: addr:country
-          - key: addr:district
-            tag_value: addr:district
-          - key: addr:province
-            tag_value: addr:province
-          - key: addr:suburb
-            tag_value: addr:suburb
-          - key: addr:place
-            tag_value: addr:place
-          - key: addr:hamlet
-            tag_value: addr:hamlet
-          - key: addr:neighbourhood
-            tag_value: addr:neighbourhood
 args:
   area:
     description: Geofabrik area to download
