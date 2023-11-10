@@ -18,7 +18,6 @@ layers:
             - footway
             - path
             - steps
-            - track
             - via_ferrata
           __all__:
             # we only care about tracks if they have some trail access tag
@@ -28,7 +27,7 @@ layers:
               bicycle: __any__
               dog: __any__
               foot: __any__
-              horse: __any__  
+              horse: __any__
               ski: __any__
               ski:nordic: __any__
               wheelchair: __any__
@@ -126,7 +125,6 @@ layers:
                 - footway
                 - path
                 - steps
-                - track
                 - via_ferrata
               __all__:
                 # we only care about tracks if they have some trail access tag
@@ -136,7 +134,7 @@ layers:
                   bicycle: __any__
                   dog: __any__
                   foot: __any__
-                  horse: __any__  
+                  horse: __any__
                   ski: __any__
                   ski:nordic: __any__
                   wheelchair: __any__
