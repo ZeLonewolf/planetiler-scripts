@@ -5,54 +5,50 @@ sources:
   osm:
     type: osm
     local_path: data/sources/planet.osm.pbf
-tag_mappings:
-  width: integer
-  informal: boolean
 layers:
   - id: trail
     features:
       - source: osm
         geometry: line
-        min_zoom: 7
+        min_zoom: 5
         include_when:
           highway:
-            - path
-            - footway
-            - steps
-            - cycleway
             - bridleway
+            - cycleway
+            - footway
+            - path
+            - steps
             - track
             - via_ferrata
           __all__:
             # we only care about tracks if they have some trail access tag
             - highway: track
             - __any__:
-              foot: __any__
-              bicycle: __any__
-              horse: __any__
               atv: __any__
+              bicycle: __any__
+              dog: __any__
+              foot: __any__
+              horse: __any__  
               ski: __any__
               ski:nordic: __any__
+              wheelchair: __any__
         exclude_when:
           footway: __any__
+          golf: cartpath
           indoor: __any__
         attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
           - key: highway
             tag_value: highway
-          - key: name
-            tag_value: name
-          - key: alt_name
-            tag_value: alt_name
-          - key: short_name
-            tag_value: short_name
-          - key: official_name
-            tag_value: official_name
-          - key: description
-            tag_value: description
-          - key: note
-            tag_value: note
-          - key: fixme
-            tag_value: fixme
+          - key: piste:type
+            tag_value: piste:type
+          - key: bridge
+            tag_value: bridge
+          - key: ford
+            tag_value: ford
+          - key: tunnel
+            tag_value: tunnel
           - key: trailblazed
             tag_value: trailblazed
           - key: symbol
@@ -63,12 +59,6 @@ layers:
             tag_value: access
           - key: toll
             tag_value: toll
-          - key: fee
-            tag_value: fee
-            type: string
-          - key: seasonal
-            tag_value: seasonal
-            type: string
           - key: foot
             tag_value: foot
           - key: bicycle
@@ -95,14 +85,18 @@ layers:
             tag_value: moped
           - key: motorcar
             tag_value: motorcar
+          - key: wheelchair
+            tag_value: wheelchair
           - key: oneway
             tag_value: oneway
+          - key: oneway:bicycle
+            tag_value: oneway:bicycle
           - key: incline
             tag_value: incline
           - key: width
             tag_value: width
-          - key: mtb_scale
-            tag_value: mtb:scale
+          - key: mtb
+            tag_value: mtb
           - key: surface
             tag_value: surface
           - key: smoothness
@@ -112,79 +106,75 @@ layers:
           - key: trail_visibility
             tag_value: trail_visibility
           - key: sac_scale
-            tag_value: sca_scale
+            tag_value: sac_scale
           - key: informal
             tag_value: informal
-            type: string
           - key: operator
             tag_value: operator
-          - key: operator_type
-            tag_value: operator:type
-          - key: operator_wikidata
-            tag_value: operator:wikidata
-          - key: wikidata
-            tag_value: wikidata
+  - id: trail_name
+    features:
+      - source: osm
+        geometry: line
+        min_zoom: 10
+        include_when:
+          __all__:
+            name: __any__
+            __any__:
+              highway:
+                - bridleway
+                - cycleway
+                - footway
+                - path
+                - steps
+                - track
+                - via_ferrata
+              __all__:
+                # we only care about tracks if they have some trail access tag
+                - highway: track
+                - __any__:
+                  atv: __any__
+                  bicycle: __any__
+                  dog: __any__
+                  foot: __any__
+                  horse: __any__  
+                  ski: __any__
+                  ski:nordic: __any__
+                  wheelchair: __any__
+        exclude_when:
+          footway: __any__
+          golf: cartpath
+          indoor: __any__
+        attributes:
+          - key: name
+            tag_value: name
     tile_post_process:
       merge_line_strings:
-        min_length: 1
-        tolerance: 1
+        min_length: 10
+        tolerance: 0.1
         buffer: 5
   - id: trail_poi
     features:
       - source: osm
         geometry: point
-        min_zoom: 10
+        min_zoom: 7
         include_when:
           highway:
             - trailhead
+          amenity:
+            - ranger_station
         attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
           - key: highway
             tag_value: highway
           - key: name
             tag_value: name
-          - key: alt_name
-            tag_value: alt_name
-          - key: short_name
-            tag_value: short_name
-          - key: official_name
-            tag_value: official_name
-          - key: description
-            tag_value: description
-          - key: note
-            tag_value: note
-          - key: fixme
-            tag_value: fixme
           - key: access
             tag_value: access
-          - key: toll
-            tag_value: toll
-            type: string
-          - key: fee
-            tag_value: fee
-            type: string
-          - key: charge
-            tag_value: charge
-          - key: seasonal
-            tag_value: seasonal
-            type: string
-          - key: website
-            tag_value: website
-          - key: phone
-            tag_value: phone
-          - key: drinking_water
-            tag_value: drinking_water
-            type: string
-          - key: bin
-            tag_value: bin
-            type: string
+          - key: wheelchair
+            tag_value: wheelchair
           - key: operator
             tag_value: operator
-          - key: operator_type
-            tag_value: operator:type
-          - key: operator_wikidata
-            tag_value: operator:wikidata
-          - key: wikidata
-            tag_value: wikidata
 args:
   area:
     description: Geofabrik area to download
