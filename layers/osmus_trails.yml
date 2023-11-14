@@ -14,6 +14,7 @@ layers:
         include_when:
           &trail_include_filter
           highway:
+            # include any path-like features
             - bridleway
             - cycleway
             - footway
@@ -29,13 +30,21 @@ layers:
               dog: __any__
               foot: __any__
               horse: __any__
+              piste:type: __any__
               ski: __any__
               ski:nordic: __any__
+              snowmobile: __any__
               wheelchair: __any__
+          __all__:
+            # include roads that are part of canoe portages 
+            - highway: __any__
+            - canoe: portage
         exclude_when:
           &trail_exclude_filter
+          # ignore sidewalks, crossings, access aisles, etc.
           footway: __any__
           golf: cartpath
+          # outdoor stuff only
           indoor: __any__
         attributes:
           - key: OSM_ID
@@ -116,6 +125,38 @@ layers:
             tag_value: wheelchair
           - key: width
             tag_value: width
+      - source: osm
+        geometry: line
+        min_zoom: 5
+        include_when:
+          waterway:
+            - river
+            - stream
+            - tidal_channel
+            - canal
+            - drain
+            - ditch
+            - canoe_pass
+            - fairway
+            - link
+          canoe: __any__
+        attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
+          - key: access
+            tag_value: access
+          - key: boat
+            tag_value: boat
+          - key: bridge
+            tag_value: bridge
+          - key: canoe
+            tag_value: canoe
+          - key: dog
+            tag_value: dog
+          - key: tunnel
+            tag_value: tunnel
+          - key: width
+            tag_value: width
   - id: trail_name
     features:
       - source: osm
@@ -141,11 +182,7 @@ layers:
         geometry: point
         min_zoom: 5
         include_when:
-          amenity:
-            - ranger_station
-        exclude_when:
-          highway:
-            - trailhead
+          amenity: ranger_station
         attributes:
           - key: OSM_TYPE
             value: "node"
@@ -168,8 +205,7 @@ layers:
         geometry: polygon_centroid_if_convex
         min_zoom: 5
         include_when:
-          amenity:
-            - ranger_station
+          amenity: ranger_station
         attributes:
           - key: OSM_TYPE
             value: "way"
@@ -191,8 +227,9 @@ layers:
         geometry: point
         min_zoom: 7
         include_when:
-          highway:
-            - trailhead
+          highway: trailhead
+        exclude_when:
+          amenity: ranger_station
         attributes:
           - key: OSM_ID
             value: "${feature.id}"
@@ -214,8 +251,6 @@ layers:
             tag_value: hiking
           - key: horse
             tag_value: horse
-          - key: information
-            tag_value: information
           - key: mtb
             tag_value: mtb
           - key: name
@@ -232,6 +267,32 @@ layers:
             tag_value: snowmobile
           - key: wheelchair
             tag_value: wheelchair
+      # `canoe=put_in` is like `highway=trailhead` for water trails
+      - source: osm
+        geometry: point
+        min_zoom: 7
+        include_when:
+          canoe: put_in
+        exclude_when:
+          amenity: ranger_station
+          highway: trailhead
+        attributes:
+          - key: OSM_ID
+            value: "${feature.id}"
+          - key: access
+            tag_value: access
+          - key: canoe
+            tag_value: canoe
+          - key: dog
+            tag_value: dog
+          - key: name
+            tag_value: name
+          - key: opening_hours
+            tag_value: opening_hours
+          - key: operator
+            tag_value: operator
+          - key: wheelchair
+            tag_value: wheelchair
       - source: osm
         geometry: point
         # route markers are abundant so restrict to higher zooms
@@ -241,10 +302,9 @@ layers:
             - route_marker
             - guidepost
         exclude_when:
-          amenity:
-            - ranger_station
-          highway:
-            - trailhead
+          amenity: ranger_station
+          canoe: put_in
+          highway: trailhead
         attributes:
           - key: OSM_ID
             value: "${feature.id}"
