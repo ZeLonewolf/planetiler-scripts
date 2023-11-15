@@ -12,14 +12,9 @@ layers:
         geometry: line
         min_zoom: 5
         include_when:
-          &trail_include_filter
           highway:
-            # include any path-like features
             - bridleway
-            - cycleway
-            - footway
             - path
-            - steps
             - via_ferrata
           __all__:
             # we only care about tracks if they have some trail access tag
@@ -31,22 +26,17 @@ layers:
               foot: __any__
               horse: __any__
               piste:type: __any__
-              ski: __any__
               ski:nordic: __any__
               snowmobile: __any__
               wheelchair: __any__
           __all__:
-            # include roads that are part of canoe portages 
+            # include any roads or paths that are part of canoe portages 
             - highway: __any__
             - canoe: portage
         exclude_when:
-          &trail_exclude_filter
-          # ignore sidewalks, crossings, access aisles, etc.
-          footway: __any__
-          golf: cartpath
-          # outdoor stuff only
           indoor: __any__
         attributes:
+          &trail_attributes
           - key: OSM_ID
             value: "${feature.id}"
           - key: access
@@ -81,6 +71,8 @@ layers:
             tag_value: motor_vehicle
           - key: mtb
             tag_value: mtb
+          - key: name
+            tag_value: name
           - key: oneway
             tag_value: oneway
           - key: oneway:bicycle
@@ -97,8 +89,6 @@ layers:
             tag_value: ramp:wheelchair
           - key: sac_scale
             tag_value: sac_scale
-          - key: ski
-            tag_value: ski
           - key: ski:nordic
             tag_value: ski:nordic
           - key: smoothness
@@ -125,6 +115,28 @@ layers:
             tag_value: wheelchair
           - key: width
             tag_value: width
+      - source: osm
+        geometry: line
+        min_zoom: 5
+        include_when:
+          highway:
+            - footway
+            - steps
+        exclude_when:
+          # ignore sidewalks, crossings, access aisles, etc.
+          footway: __any__
+          indoor: __any__
+        attributes: *trail_attributes
+      - source: osm
+        geometry: line
+        min_zoom: 5
+        include_when:
+          highway: cycleway
+        exclude_when:
+          # ignore bike lanes that are part of roads
+          cycleway: lane
+          indoor: __any__
+        attributes: *trail_attributes
       - source: osm
         geometry: line
         min_zoom: 5
@@ -157,24 +169,6 @@ layers:
             tag_value: tunnel
           - key: width
             tag_value: width
-  - id: trail_name
-    features:
-      - source: osm
-        geometry: line
-        min_zoom: 10
-        include_when:
-          __all__:
-            name: __any__
-            __any__: *trail_include_filter
-        exclude_when: *trail_exclude_filter
-        attributes:
-          - key: name
-            tag_value: name
-    tile_post_process:
-      merge_line_strings:
-        min_length: 10
-        tolerance: 0.1
-        buffer: 5
   - id: trail_poi
     features:
       # collect ranger stations mapped as nodes
@@ -259,8 +253,6 @@ layers:
             tag_value: opening_hours
           - key: operator
             tag_value: operator
-          - key: ski
-            tag_value: ski
           - key: ski:nordic
             tag_value: ski:nordic
           - key: snowmobile
@@ -330,8 +322,6 @@ layers:
             tag_value: name
           - key: operator
             tag_value: operator
-          - key: ski
-            tag_value: ski
           - key: ski:nordic
             tag_value: ski:nordic
           - key: snowmobile
