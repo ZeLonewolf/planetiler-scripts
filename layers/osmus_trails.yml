@@ -134,7 +134,9 @@ layers:
           highway: cycleway
         exclude_when:
           # ignore bike lanes that are part of roads
-          cycleway: lane
+          cycleway:
+            - lane
+            - crossing
           indoor: __any__
         attributes: *trail_attributes
       - source: osm
