@@ -152,17 +152,18 @@ layers:
         geometry: line
         min_zoom: 5
         include_when:
-          waterway:
-            - river
-            - stream
-            - tidal_channel
-            - canal
-            - drain
-            - ditch
-            - canoe_pass
-            - fairway
-            - link
-          canoe: __any__
+          __all__:
+            - waterway:
+              - river
+              - stream
+              - tidal_channel
+              - canal
+              - drain
+              - ditch
+              - canoe_pass
+              - fairway
+              - link
+            - canoe: __any__
         exclude_when:
           indoor: __any__
         attributes:
