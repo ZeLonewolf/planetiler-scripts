@@ -12,11 +12,11 @@ layers:
         geometry: line
         min_zoom: 5
         include_when:
-          highway:
+          - highway:
             - bridleway
             - path
             - via_ferrata
-          __all__:
+          - __all__:
             # we only care about tracks if they have some trail access tag
             - highway: track
             - __any__:
@@ -29,7 +29,7 @@ layers:
               ski:nordic: __any__
               snowmobile: __any__
               wheelchair: __any__
-          __all__:
+          - __all__:
             # include any roads or paths that are part of canoe portages 
             - highway: __any__
             - canoe: portage
