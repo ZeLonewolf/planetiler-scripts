@@ -12,11 +12,11 @@ layers:
         geometry: line
         min_zoom: 5
         include_when:
-          highway:
+          - highway:
             - bridleway
             - path
             - via_ferrata
-          __all__:
+          - __all__:
             # we only care about tracks if they have some trail access tag
             - highway: track
             - __any__:
@@ -29,12 +29,15 @@ layers:
               ski:nordic: __any__
               snowmobile: __any__
               wheelchair: __any__
-          __all__:
+          - __all__:
             # include any roads or paths that are part of canoe portages 
             - highway: __any__
             - canoe: portage
         exclude_when:
           indoor: __any__
+          man_made: pier
+          public_transport: platform
+          railway: platform
         attributes:
           &trail_attributes
           - key: OSM_ID
@@ -126,6 +129,9 @@ layers:
           # ignore sidewalks, crossings, access aisles, etc.
           footway: __any__
           indoor: __any__
+          man_made: pier
+          public_transport: platform
+          railway: platform
         attributes: *trail_attributes
       - source: osm
         geometry: line
@@ -138,22 +144,28 @@ layers:
             - lane
             - crossing
           indoor: __any__
+          man_made: pier
+          public_transport: platform
+          railway: platform
         attributes: *trail_attributes
       - source: osm
         geometry: line
         min_zoom: 5
         include_when:
-          waterway:
-            - river
-            - stream
-            - tidal_channel
-            - canal
-            - drain
-            - ditch
-            - canoe_pass
-            - fairway
-            - link
-          canoe: __any__
+          __all__:
+            - waterway:
+              - river
+              - stream
+              - tidal_channel
+              - canal
+              - drain
+              - ditch
+              - canoe_pass
+              - fairway
+              - link
+            - canoe: __any__
+        exclude_when:
+          indoor: __any__
         attributes:
           - key: OSM_ID
             value: "${feature.id}"
@@ -167,6 +179,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: name
+            tag_value: name
           - key: tunnel
             tag_value: tunnel
           - key: width
@@ -203,6 +217,7 @@ layers:
         include_when:
           amenity: ranger_station
         attributes:
+          # FIXME: `way` type is incorrect if feature is a multipolygon 
           - key: OSM_TYPE
             value: "way"
           - key: OSM_ID
@@ -247,6 +262,8 @@ layers:
             tag_value: hiking
           - key: horse
             tag_value: horse
+          - key: informal
+            tag_value: informal
           - key: mtb
             tag_value: mtb
           - key: name
@@ -279,6 +296,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: informal
+            tag_value: informal
           - key: name
             tag_value: name
           - key: opening_hours
