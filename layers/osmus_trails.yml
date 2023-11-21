@@ -179,10 +179,18 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: intermittent
+            tag_value: intermittent
+          - key: oneway:canoe
+            tag_value: oneway:canoe
           - key: name
             tag_value: name
+          - key: tidal
+            tag_value: tidal
           - key: tunnel
             tag_value: tunnel
+          - key: waterway
+            tag_value: waterway
           - key: width
             tag_value: width
   - id: trail_poi
@@ -194,8 +202,6 @@ layers:
         include_when:
           amenity: ranger_station
         attributes:
-          - key: OSM_TYPE
-            value: "node"
           - key: OSM_ID
             value: "${feature.id}"
           - key: access
@@ -217,9 +223,9 @@ layers:
         include_when:
           amenity: ranger_station
         attributes:
-          # FIXME: `way` type is incorrect if feature is a multipolygon 
-          - key: OSM_TYPE
-            value: "way"
+          # could be an OSM way or relation
+          - key: SRC_GEOM
+            value: "polygon"
           - key: OSM_ID
             value: "${feature.id}"
           - key: access
