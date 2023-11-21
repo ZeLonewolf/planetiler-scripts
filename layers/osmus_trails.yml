@@ -54,6 +54,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: ford
@@ -179,6 +181,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: intermittent
             tag_value: intermittent
           - key: oneway:canoe
@@ -208,6 +212,8 @@ layers:
             tag_value: access
           - key: amenity
             tag_value: amenity
+          - key: fixme
+            tag_value: fixme
           - key: name
             tag_value: name
           - key: opening_hours
@@ -232,6 +238,8 @@ layers:
             tag_value: access
           - key: amenity
             tag_value: amenity
+          - key: fixme
+            tag_value: fixme
           - key: name
             tag_value: name
           - key: opening_hours
@@ -260,6 +268,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: highway
@@ -302,6 +312,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: informal
             tag_value: informal
           - key: name
@@ -335,6 +347,8 @@ layers:
             tag_value: canoe
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: hiking
