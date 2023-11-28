@@ -52,8 +52,12 @@ layers:
             tag_value: bridge
           - key: canoe
             tag_value: canoe
+          - key: check_date
+            tag_value: check_date
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: ford
@@ -100,6 +104,8 @@ layers:
             tag_value: snowmobile
           - key: surface
             tag_value: surface
+          - key: survey:date
+            tag_value: survey:date
           - key: symbol
             tag_value: symbol
           - key: toll
@@ -177,12 +183,26 @@ layers:
             tag_value: bridge
           - key: canoe
             tag_value: canoe
+          - key: check_date
+            tag_value: check_date
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
+          - key: intermittent
+            tag_value: intermittent
+          - key: oneway:canoe
+            tag_value: oneway:canoe
           - key: name
             tag_value: name
+          - key: survey:date
+            tag_value: survey:date
+          - key: tidal
+            tag_value: tidal
           - key: tunnel
             tag_value: tunnel
+          - key: waterway
+            tag_value: waterway
           - key: width
             tag_value: width
   - id: trail_poi
@@ -194,20 +214,24 @@ layers:
         include_when:
           amenity: ranger_station
         attributes:
-          - key: OSM_TYPE
-            value: "node"
           - key: OSM_ID
             value: "${feature.id}"
           - key: access
             tag_value: access
           - key: amenity
             tag_value: amenity
+          - key: check_date
+            tag_value: check_date
+          - key: fixme
+            tag_value: fixme
           - key: name
             tag_value: name
           - key: opening_hours
             tag_value: opening_hours
           - key: operator
             tag_value: operator
+          - key: survey:date
+            tag_value: survey:date
           - key: wheelchair
             tag_value: wheelchair
       # collect ranger stations mapped as areas
@@ -217,21 +241,27 @@ layers:
         include_when:
           amenity: ranger_station
         attributes:
-          # FIXME: `way` type is incorrect if feature is a multipolygon 
-          - key: OSM_TYPE
-            value: "way"
+          # could be an OSM way or relation
+          - key: SRC_GEOM
+            value: "polygon"
           - key: OSM_ID
             value: "${feature.id}"
           - key: access
             tag_value: access
           - key: amenity
             tag_value: amenity
+          - key: check_date
+            tag_value: check_date
+          - key: fixme
+            tag_value: fixme
           - key: name
             tag_value: name
           - key: opening_hours
             tag_value: opening_hours
           - key: operator
             tag_value: operator
+          - key: survey:date
+            tag_value: survey:date
           - key: wheelchair
             tag_value: wheelchair
       - source: osm
@@ -252,8 +282,12 @@ layers:
             tag_value: bicycle
           - key: canoe
             tag_value: canoe
+          - key: check_date
+            tag_value: check_date
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: highway
@@ -276,6 +310,8 @@ layers:
             tag_value: ski:nordic
           - key: snowmobile
             tag_value: snowmobile
+          - key: survey:date
+            tag_value: survey:date
           - key: wheelchair
             tag_value: wheelchair
       # `canoe=put_in` is like `highway=trailhead` for water trails
@@ -294,8 +330,12 @@ layers:
             tag_value: access
           - key: canoe
             tag_value: canoe
+          - key: check_date
+            tag_value: check_date
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: informal
             tag_value: informal
           - key: name
@@ -304,6 +344,8 @@ layers:
             tag_value: opening_hours
           - key: operator
             tag_value: operator
+          - key: survey:date
+            tag_value: survey:date
           - key: wheelchair
             tag_value: wheelchair
       - source: osm
@@ -327,8 +369,12 @@ layers:
             tag_value: bicycle
           - key: canoe
             tag_value: canoe
+          - key: check_date
+            tag_value: check_date
           - key: dog
             tag_value: dog
+          - key: fixme
+            tag_value: fixme
           - key: foot
             tag_value: foot
           - key: hiking
@@ -347,6 +393,8 @@ layers:
             tag_value: ski:nordic
           - key: snowmobile
             tag_value: snowmobile
+          - key: survey:date
+            tag_value: survey:date
           - key: wheelchair
             tag_value: wheelchair
 args:
