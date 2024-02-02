@@ -60,9 +60,12 @@ for file in "$DIR/data/layers/"*.yml; do
         --max-point-buffer=4
 done
 
-# Check if the file exists
+# Check if the file exists and is at least 50GB
 if [[ ! -f "$PLANET" ]]; then
   echo "Error: File $PLANET does not exist."
+  exit 1
+elif [[ $(stat -c %s "$PLANET") -lt $((50*1024*1024*1024)) ]]; then
+  echo "Error: File $PLANET is smaller than 50GB."
   exit 1
 fi
 
