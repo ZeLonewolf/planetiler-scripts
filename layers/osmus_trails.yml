@@ -32,7 +32,7 @@ layers:
           - __all__:
             # include any roads or paths that are part of canoe portages 
             - highway: __any__
-            - canoe: portage
+            - portage: __any__
         exclude_when:
           indoor: __any__
           man_made: pier
