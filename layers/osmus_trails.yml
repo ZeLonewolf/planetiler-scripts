@@ -169,6 +169,7 @@ layers:
               - canoe_pass
               - fairway
               - link
+              - flowline
             - canoe: __any__
         exclude_when:
           indoor: __any__
